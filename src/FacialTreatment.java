@@ -8,6 +8,6 @@ public class FacialTreatment extends SpaServiceDecorator {
     }
     @Override
     public double getPrice() {
-        return spaService.getPrice() + 400;
+        return spaService.getPrice() + 550;
     }
 }
