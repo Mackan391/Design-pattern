@@ -4,7 +4,7 @@ public class FacialTreatment extends SpaServiceDecorator {
     }
     @Override
     public String getDescription() {
-        return spaService.getDescription() + ", Facial Treatment 60 min";
+        return spaService.getDescription() + ", \nFacial Treatment 60 min";
     }
     @Override
     public double getPrice() {
