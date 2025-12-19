@@ -1,3 +1,8 @@
+import SpaServices.BasicSpa;
+import SpaServices.FacialTreatment;
+import SpaServices.Massage;
+import SpaServices.SpaService;
+
 public class Main {
     public static void main(String[] args) {
         SpaService spa = new BasicSpa();
@@ -9,3 +14,4 @@ public class Main {
 
     }
 }
+//Har bara testat så decorator fungerar, ej lagt in något annat här

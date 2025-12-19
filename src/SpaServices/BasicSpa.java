@@ -1,4 +1,6 @@
-public class BasicSpa implements SpaService{
+package SpaServices;
+
+public class BasicSpa implements SpaService {
     @Override
     public String getDescription() {
         return "Basic Spa Package:" +
