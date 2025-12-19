@@ -1,3 +1,5 @@
+package SpaServices;
+
 public abstract class SpaServiceDecorator implements SpaService {
     protected SpaService spaService;
 

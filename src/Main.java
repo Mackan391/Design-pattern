@@ -1,3 +1,8 @@
+import SpaServices.BasicSpa;
+import SpaServices.FacialTreatment;
+import SpaServices.Massage;
+import SpaServices.SpaService;
+
 public class Main {
     public static void main(String[] args) {
         SpaService spa = new BasicSpa();
