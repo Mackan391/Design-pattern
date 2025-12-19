@@ -1,6 +1,4 @@
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,5 +52,11 @@ public class BookingManager {
 
     // Används för att slippa få varningar vid körning - vi vet att filen är safe
     @SuppressWarnings("unchecked")
-    public void loadBookingsFromFile() {}
+    public void loadBookingsFromFile() {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("bookings.dat"))) {
+            bookings = (List<Booking>) in.readObject();
+        } catch (Exception e) {
+            bookings = new ArrayList<>();
+        }
+    }
 }
