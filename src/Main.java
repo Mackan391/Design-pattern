@@ -14,3 +14,4 @@ public class Main {
 
     }
 }
+//Har bara testat så decorator fungerar, ej lagt in något annat här
