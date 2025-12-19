@@ -1,3 +1,6 @@
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,4 +36,23 @@ public class BookingManager {
         return result;
     }
 
+    public List<Booking> getBookingsForRole(User user){
+        if (user.getRole() != Role.ADMIN){
+            throw new SecurityException("Access denied");
+        }
+        return bookings;
+    }
+
+    //Sparar bokningen till fil
+    public void saveBookingsToFile() {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("bookings.dat"))) {
+            out.writeObject(bookings);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Används för att slippa få varningar vid körning - vi vet att filen är safe
+    @SuppressWarnings("unchecked")
+    public void loadBookingsFromFile() {}
 }
