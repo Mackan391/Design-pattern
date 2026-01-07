@@ -14,4 +14,10 @@ public class BookingController {
         manager.addBooking(booking);
         view.showMessage("Booking created successfully!");
     }
+
+    public void showUserBookings(User user) {
+        for (Booking b: manager.getBookingsForUser(user)) {
+            view.showBooking(b);
+        }
+    }
 }
