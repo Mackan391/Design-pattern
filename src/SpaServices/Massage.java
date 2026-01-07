@@ -6,7 +6,7 @@ public class Massage extends SpaServiceDecorator {
     }
     @Override
     public String getDescription() {
-        return spaService.getDescription() + "\nSpaServices.Massage 40 min";
+        return spaService.getDescription() + "\nMassage 40 min";
     }
     @Override
     public double getPrice() {

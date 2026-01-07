@@ -34,7 +34,7 @@ public class BookingManager {
         return result;
     }
 
-    public List<Booking> getBookingsForRole(User user){
+    public List<Booking> getAllBookings(User user){
         if (user.getRole() != Role.ADMIN){
             throw new SecurityException("Access denied");
         }

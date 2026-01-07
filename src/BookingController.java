@@ -23,7 +23,7 @@ public class BookingController {
 
     public void showAllBookings(User admin) {
         try {
-            for (Booking b: manager.getBookingsForUser(admin)) {
+            for (Booking b: manager.getAllBookings(admin)) {
                 view.showBooking(b);
             }
         } catch (SecurityException e) {

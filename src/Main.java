@@ -13,6 +13,7 @@ public class Main {
         BookingController controller = new BookingController(manager, view);
 
         User customer = new User("Johanna", Role.CUSTOMER);
+        User customer2 = new User("John", Role.CUSTOMER);
         User admin = new User("Admin", Role.ADMIN);
 
         SpaService service = new BasicSpa();
@@ -21,7 +22,11 @@ public class Main {
 
         controller.createBooking(customer, service, "2026-03-22");
 
-        view.showMessage("Customer bokkings:");
+        SpaService service2 = new BasicSpa();
+        service2 = new FacialTreatment(service2);
+        controller.createBooking(customer2, service2, "2026-01-22");
+
+        view.showMessage("Customer bookings:");
         controller.showUserBookings(customer);
 
         view.showMessage("Admin view:");
