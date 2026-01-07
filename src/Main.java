@@ -5,13 +5,15 @@ import SpaServices.SpaService;
 
 public class Main {
     public static void main(String[] args) {
-        SpaService spa = new BasicSpa();
-        spa = new Massage(spa);
-        spa = new FacialTreatment(spa);
 
-        System.out.println(spa.getDescription());
-        System.out.println("Total: " + spa.getPrice() + " kr");
+        BookingManager manager = BookingManager.getInstance();
+        manager.loadBookingsFromFile();
 
+        BookingView view = new BookingView();
+        BookingController controller = new BookingController(manager, view);
+
+        User customer = new User("Johanna", Role.CUSTOMER);
+        User admin = new User("Admin", Role.ADMIN);
     }
 }
 //Har bara testat så decorator fungerar, ej lagt in något annat här
