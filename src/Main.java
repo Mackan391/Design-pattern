@@ -14,6 +14,20 @@ public class Main {
 
         User customer = new User("Johanna", Role.CUSTOMER);
         User admin = new User("Admin", Role.ADMIN);
+
+        SpaService service = new BasicSpa();
+        service = new Massage(service);
+        service = new FacialTreatment(service);
+
+        controller.createBooking(customer, service, "2026-03-22");
+
+        view.showMessage("Customer bokkings:");
+        controller.showUserBookings(customer);
+
+        view.showMessage("Admin view:");
+        controller.showAllBookings(admin);
+
+        manager.saveBookingsToFile();
     }
 }
 //Har bara testat så decorator fungerar, ej lagt in något annat här
