@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import Users.User;
+import Users.Role;
 
 public class BookingManager {
     private static BookingManager instance;
