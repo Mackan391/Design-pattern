@@ -20,4 +20,14 @@ public class BookingController {
             view.showBooking(b);
         }
     }
+
+    public void showAllBookings(User admin) {
+        try {
+            for (Booking b: manager.getBookingsForUser(admin)) {
+                view.showBooking(b);
+            }
+        } catch (SecurityException e) {
+            view.showMessage("Access denied! Admin only.");
+        }
+    }
 }
