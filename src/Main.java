@@ -35,4 +35,4 @@ public class Main {
         manager.saveBookingsToFile();
     }
 }
-//Har bara testat så decorator fungerar, ej lagt in något annat här
+
