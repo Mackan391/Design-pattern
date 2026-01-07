@@ -1,5 +1,4 @@
 import SpaServices.SpaService;
-import Users.User;
 import java.io.Serializable;
 
 public class Booking implements Serializable {
