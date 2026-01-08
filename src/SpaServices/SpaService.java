@@ -1,6 +1,8 @@
 package SpaServices;
 
-public interface SpaService {
+import java.io.Serializable;
+
+public interface SpaService extends Serializable {
     String getDescription();
     double getPrice();
 }
