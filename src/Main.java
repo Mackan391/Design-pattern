@@ -1,10 +1,9 @@
-import SpaServices.BasicSpa;
-import SpaServices.FacialTreatment;
-import SpaServices.Massage;
-import SpaServices.SpaService;
+import SpaServices.*;
 
 public class Main {
     public static void main(String[] args) {
+
+        SpaMenu.showServices();
 
         BookingManager manager = BookingManager.getInstance();
         manager.loadBookingsFromFile();
