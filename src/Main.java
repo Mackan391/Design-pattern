@@ -4,6 +4,10 @@ import SpaServices.*;
 public class Main {
     public static void main(String[] args) {
 
+        SpaView spaview = new SpaView();
+        SpaController spacontroller = new SpaController(spaview);
+        spacontroller.showServices();
+
         SpaMenu.showServices();
 
         BookingManager manager = BookingManager.getInstance();
