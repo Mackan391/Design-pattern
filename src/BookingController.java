@@ -30,4 +30,25 @@ public class BookingController {
             view.showMessage("Access denied! Admin only.");
         }
     }
+
+    public void updateBookingAsAdmin(
+            User admin,
+            String customerName,
+            String oldDate,
+            String newDate
+    ) {
+        try {
+            boolean updated =
+                    manager.adminUpdateBooking(admin, customerName, oldDate, newDate);
+
+            if (updated) {
+                view.showMessage("\nBooking date updated successfully!");
+            } else {
+                view.showMessage("No matching booking found to update.");
+            }
+        } catch (SecurityException e) {
+            view.showMessage("Access denied! Admin only.");
+        }
+    }
+
 }

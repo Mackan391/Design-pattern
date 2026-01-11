@@ -1,5 +1,6 @@
 import SpaServices.*;
 
+
 public class Main {
     public static void main(String[] args) {
 
@@ -29,6 +30,16 @@ public class Main {
         controller.showUserBookings(customer);
 
         view.showMessage("Admin view:");
+        controller.showAllBookings(admin);
+
+                controller.updateBookingAsAdmin(
+                        admin,
+                        "John",
+                        "2026-01-22",
+                        "2026-02-10"
+                );
+
+        view.showMessage("Admin view after update:\n");
         controller.showAllBookings(admin);
 
         manager.saveBookingsToFile();
