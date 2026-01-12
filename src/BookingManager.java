@@ -26,8 +26,8 @@ public class BookingManager {
         bookings.add(booking);
     }
 
-    public void removeBooking(Booking booking) {
-        bookings.remove(booking);
+    public void removeBooking(int index) {
+        bookings.remove(index);
     }
 
     public List<Booking> getBookingsForUser(User user) {
@@ -71,6 +71,15 @@ public class BookingManager {
         }
 
         return availableDates;
+    }
+    public void upDateBooking(int index, String newDate) {
+        Booking old = bookings.get(index);
+        Booking updated = new Booking(
+                old.getUser(),
+                old.getSpaService(),
+                newDate
+        );
+        bookings.set(index, updated);
     }
 
 

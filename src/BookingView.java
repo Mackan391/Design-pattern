@@ -27,11 +27,22 @@ public class BookingView {
         return scanner.nextLine();
     }
 
-    public void showAdminMenu() {
+    public int showAdminMenu() {
         User admin = new User("admin", Role.ADMIN);
         System.out.println("------Admin-------");
         System.out.println("---Bokningsöversikt---");
-        bookingController.showAllBookings(admin);
+        System.out.println("1. Delete Booking");
+        System.out.println("2. Edit Booking");
+        System.out.println("3. Back");
+        System.out.println("Choice: ");
+        return scanner.nextInt();
+    }
+    public int askForBookingIndex() {
+        return scanner.nextInt();
+    }
+    public String askForNewDate() {
+        System.out.println("Ange nytt datum: YYYY/MM/DD: ");
+        return scanner.nextLine();
     }
 
 
@@ -80,5 +91,10 @@ public class BookingView {
     }
     public void showMessage(String message) {
         System.out.println(message);
+    }
+    public void showBookingsWithIndex(List<Booking> bookings) {
+        for (int i = 0; i<bookings.size(); i++) {
+            System.out.println((i + 1) + ". " +  bookings.get(i));
+        }
     }
 }

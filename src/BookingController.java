@@ -83,11 +83,46 @@ public class BookingController {
         User admin = new User("Admin", Role.ADMIN);
         List<Booking> bookings = manager.getAllBookings(admin);
 
-        if(bookings.isEmpty()) {
+        if (bookings.isEmpty()) {
             view.showMessage("Hittade inga bokningar");
             return;
         }
-        System.out.println(bookings);
+        view.showBookingsWithIndex(bookings);
+
+        int adminChoice = view.showAdminMenu();
+        if (adminChoice == 0) {
+            view.showMenu();
+        }
+        System.out.println("Ange bokningsnummer: ");
+        int index = view.askForBookingIndex() - 1;
+
+        if (index < 0 || index >= bookings.size()) {
+            view.showMessage("Ogiltligt bokningsnummer");
+            return;
+        }
+
+        if (adminChoice == 1) {
+            manager.removeBooking(index);
+            view.showMessage("Bokningen är nu borttagen");
+        }
+        if (adminChoice == 2) {
+            List<String> freeTimes = manager.getAvailableDates();
+            view.showAvailableDates();
+            String newDate = view.askForDate();
+
+            String newTime = view.askForNewDate();
+            if (freeTimes.contains(newTime)) {
+                view.showMessage("Datumet ej tillgängligt!");
+                return;
+            }
+
+            manager.upDateBooking(index, newDate);
+            view.showMessage("Booking updated successfully");
+        }
+
+        if (adminChoice == 3) {
+            view.showMenu();
+        }
     }
 
 
@@ -98,26 +133,6 @@ public class BookingController {
             }
         } catch (SecurityException e) {
             view.showMessage("Nekad behörighet. Endast admin!");
-        }
-    }
-
-    public void updateBookingAsAdmin(
-            User admin,
-            String customerName,
-            String oldDate,
-            String newDate
-    ) {
-        try {
-            boolean updated =
-                    manager.adminUpdateBooking(admin, customerName, oldDate, newDate);
-
-            if (updated) {
-                view.showMessage("\nBooking date updated successfully!");
-            } else {
-                view.showMessage("No matching booking found to update.");
-            }
-        } catch (SecurityException e) {
-            view.showMessage("Access denied! Admin only.");
         }
     }
 
