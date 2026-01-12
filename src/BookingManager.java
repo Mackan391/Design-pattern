@@ -20,8 +20,21 @@ public class BookingManager {
         return instance;
     }
 
-    public void addBooking(Booking booking) {
+    public boolean isDateBooked(String date) {
+        for  (Booking b : bookings) {
+            if (b.getDate().equalsIgnoreCase(date)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean addBooking(Booking booking) {
+        if (isDateBooked(booking.getDate())) {
+            return false;
+        }
         bookings.add(booking);
+        return true;
     }
 
     public void removeBooking(Booking booking) {
@@ -79,17 +92,16 @@ public class BookingManager {
             if (current.getUser().getName().equalsIgnoreCase(customerName)
                     && current.getDate().equalsIgnoreCase(oldDate)) {
 
-                String finalDate;
                 if (newDate != null && !newDate.isBlank()) {
-                    finalDate = newDate;
-                } else {
-                    finalDate = current.getDate(); //ingen ändring
+                    if (isDateBooked(newDate)) {
+                        return false;
+                    }
                 }
 
                 Booking updated = new Booking(
                         current.getUser(),
                         current.getSpaService(),
-                        finalDate
+                        newDate
                 );
 
                 bookings.set(i, updated);

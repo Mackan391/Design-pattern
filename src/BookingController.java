@@ -11,8 +11,13 @@ public class BookingController {
 
     public void createBooking(User user, SpaService service, String date){
         Booking booking = new Booking(user, service, date);
-        manager.addBooking(booking);
-        view.showMessage("Booking created successfully!");
+        boolean success = manager.addBooking(booking);
+
+        if (success) {
+            view.showMessage("Booking has been created");
+        } else{
+            view.showMessage("Error: Date already booked");
+        }
     }
 
     public void showUserBookings(User user) {
