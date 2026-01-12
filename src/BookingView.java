@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class BookingView {
     private Scanner scanner =new Scanner(System.in);
-    private BookingController bookingController;
 
     public int showMenu() {
         System.out.println("--------------------------------------");
@@ -52,8 +51,7 @@ public class BookingView {
         return scanner.nextLine();
     }
 
-    public void showAvailableDates() {
-        List<String> dates = BookingManager.getInstance().getAvailableDates();
+    public void showAvailableDates(List<String> dates) {
         if (dates.isEmpty()) {
             System.out.println("Tyvärr, inga dagar lediga de närmaste 30 dagarna.");
         } else {
@@ -63,6 +61,7 @@ public class BookingView {
             }
         }
     }
+
 
     public String askForDate(){
         System.out.println("Ange datumet du vill boka: ");

@@ -39,7 +39,7 @@ public class BookingController {
             return; // avbryt om inga datum finns
         }
 
-        view.showAvailableDates(); // skriver ut lediga datum
+        view.showAvailableDates(availableDates); // skriver ut lediga datum
         String date = view.askForDate();
 
 
@@ -89,9 +89,7 @@ public class BookingController {
         view.showBookingsWithIndex(bookings);
 
         int adminChoice = view.showAdminMenu();
-        if (adminChoice == 0) {
-            view.showMenu();
-        }
+
         System.out.println("Ange bokningsnummer: ");
         int index = view.askForBookingIndex() - 1;
 
@@ -106,7 +104,7 @@ public class BookingController {
         }
         if (adminChoice == 2) {
             List<String> freeTimes = manager.getAvailableDates();
-            view.showAvailableDates();
+            view.showAvailableDates(freeTimes);
 
             String newTime = view.askForNewDate();
             if (!freeTimes.contains(newTime)) {
