@@ -60,12 +60,12 @@ public class BookingView {
     }
 
     public int askForServiceChoice() {
-        System.out.println("Our Spa Services:");
+        System.out.println("Våra spa-paket:");
         System.out.println("---------------------");
         System.out.println("1. Basic Spa-paket: Tillgång till pool, bastu och relax i 3h - 800 SEK");
         System.out.println("2. Basic Spa-paket + Massage 40 min - 1200 SEK");
-        System.out.println("3. Basic Spa-paket + ansiktsbehandling 60 min - 1350:-");
-        System.out.println("4. All inclusive: Basic Spa-paket, massage 40 min + ansiktsbehandling 60 min - 1750:-");
+        System.out.println("3. Basic Spa-paket + ansiktsbehandling 60 min - 1350 SEK");
+        System.out.println("4. All inclusive: Basic Spa-paket, massage 40 min + ansiktsbehandling 60 min - 1750 SEK");
         System.out.println("Var vänlig ange vilket paket du vill boka:  ");
         return scanner.nextInt();
     }

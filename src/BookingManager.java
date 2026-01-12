@@ -47,16 +47,14 @@ public class BookingManager {
         return bookings;
     }
     public List<String> getAvailableDates() {
-        // Definiera alla möjliga datum (t.ex. för en månad framåt)
+        // Definiera de fasta datum som går att boka
         List<String> allDates = new ArrayList<>();
-        LocalDate start = LocalDate.now(); // idag
-        LocalDate end = start.plusDays(30); // en månad framåt
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-
-        for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
-            allDates.add(date.format(formatter));
-        }
+        allDates.add("2026/01/15");
+        allDates.add("2026/01/20");
+        allDates.add("2026/01/22");
+        allDates.add("2026/01/25");
+        allDates.add("2026/01/28");
+        allDates.add("2026/02/01");
 
         // Samla alla datum som redan är bokade
         List<String> bookedDates = new ArrayList<>();
@@ -64,15 +62,17 @@ public class BookingManager {
             bookedDates.add(b.getDate());
         }
 
-        // Ta bort de bokade datumen från listan över alla datum
+        // Ta bort bokade datum
         List<String> availableDates = new ArrayList<>();
         for (String d : allDates) {
             if (!bookedDates.contains(d)) {
                 availableDates.add(d);
             }
         }
+
         return availableDates;
     }
+
 
     //Sparar bokningen till fil
     public void saveBookingsToFile() {
