@@ -89,9 +89,7 @@ public class BookingController {
         view.showBookingsWithIndex(bookings);
 
         int adminChoice = view.showAdminMenu();
-        if (adminChoice == 0) {
-            view.showMenu();
-        }
+
         System.out.println("Ange bokningsnummer: ");
         int index = view.askForBookingIndex() - 1;
 
