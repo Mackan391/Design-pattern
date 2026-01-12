@@ -20,6 +20,29 @@ public class BookingView {
         return scanner.nextInt();
     }
 
+    public String askForName(){
+        scanner.nextLine();
+        System.out.println("Ange ditt för- och efternamn: ");
+        return scanner.nextLine();
+    }
+
+    public String askForDate(){
+        scanner.nextLine();
+        System.out.println("Ange datumet du vill boka: ");
+        return scanner.nextLine();
+    }
+
+    public int askForServiceChoice() {
+        System.out.println("Our Spa Services:");
+        System.out.println("---------------------");
+        System.out.println("1. Basic Spa-paket: Tillgång till pool, bastu och relax i 3h - 800 SEK");
+        System.out.println("2. Basic Spa-paket + Massage 40 min - 1200 SEK");
+        System.out.println("3. Basic Spa-paket + ansiktsbehandling 60 min - 1350:-");
+        System.out.println("4. All inclusive: Basic Spa-paket, massage 40 min + ansiktsbehandling 60 min - 1750:-");
+        System.out.println("Var vänlig ange vilket paket du vill boka:  ");
+        return scanner.nextInt();
+    }
+
     public void showBooking(Booking booking) {
         System.out.println(
                 booking.getUser().getName() + " | " +
@@ -27,9 +50,6 @@ public class BookingView {
                         booking.getSpaService().getPrice() + " kr | " +
                         booking.getDate()
         );
-    }
-    public void showStartMenu() {
-
     }
     public void showMessage(String message) {
         System.out.println(message);

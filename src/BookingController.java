@@ -1,5 +1,7 @@
 import SpaServices.SpaService;
 
+import java.util.List;
+
 public class BookingController {
     private BookingManager manager;
     private BookingView view;
@@ -23,11 +25,22 @@ public class BookingController {
         }
     }
 
-    public void createBooking(User user, SpaService service, String date){
-        Booking booking = new Booking(user, service, date);
+    private void handleCustomerFlow() {
+        String name = view.askForName();
+        String date = view.askForDate();
+        User customer = new User(name, Role.CUSTOMER);
+
+        int serviceChoice = view.askForServiceChoice();
+        SpaService service = createService(serviceChoice);
+
+        Booking booking = new Booking(customer, service, date);
         manager.addBooking(booking);
-        view.showMessage("Booking created successfully!");
+
+        view.showMessage("Tack för din bokning!");
+        view.showBooking(booking);
     }
+
+
 
     public void showUserBookings(User user) {
         for (Booking b: manager.getBookingsForUser(user)) {
@@ -41,7 +54,7 @@ public class BookingController {
                 view.showBooking(b);
             }
         } catch (SecurityException e) {
-            view.showMessage("Access denied! Admin only.");
+            view.showMessage("Nekad behörighet. Endast admin!");
         }
     }
 
