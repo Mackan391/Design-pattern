@@ -62,7 +62,6 @@ public class BookingView {
         }
     }
 
-
     public String askForDate(){
         System.out.println("Ange datumet du vill boka: ");
         return scanner.nextLine();
