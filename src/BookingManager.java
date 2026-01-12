@@ -1,5 +1,7 @@
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +26,8 @@ public class BookingManager {
         bookings.add(booking);
     }
 
-    public void removeBooking(Booking booking) {
-        bookings.remove(booking);
+    public void removeBooking(int index) {
+        bookings.remove(index);
     }
 
     public List<Booking> getBookingsForUser(User user) {
@@ -40,10 +42,46 @@ public class BookingManager {
 
     public List<Booking> getAllBookings(User user) {
         if (user.getRole() != Role.ADMIN) {
-            throw new SecurityException("Access denied");
+            throw new SecurityException("Behörighet nekad");
         }
         return bookings;
     }
+    public List<String> getAvailableDates() {
+        // Definiera de fasta datum som går att boka
+        List<String> allDates = new ArrayList<>();
+        allDates.add("2026/01/15");
+        allDates.add("2026/01/20");
+        allDates.add("2026/01/22");
+        allDates.add("2026/01/25");
+        allDates.add("2026/01/28");
+        allDates.add("2026/02/01");
+
+        // Samla alla datum som redan är bokade
+        List<String> bookedDates = new ArrayList<>();
+        for (Booking b : bookings) {
+            bookedDates.add(b.getDate());
+        }
+
+        // Ta bort bokade datum
+        List<String> availableDates = new ArrayList<>();
+        for (String d : allDates) {
+            if (!bookedDates.contains(d)) {
+                availableDates.add(d);
+            }
+        }
+
+        return availableDates;
+    }
+    public void upDateBooking(int index, String newDate) {
+        Booking old = bookings.get(index);
+        Booking updated = new Booking(
+                old.getUser(),
+                old.getSpaService(),
+                newDate
+        );
+        bookings.set(index, updated);
+    }
+
 
     //Sparar bokningen till fil
     public void saveBookingsToFile() {

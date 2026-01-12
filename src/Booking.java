@@ -20,4 +20,12 @@ public class Booking implements Serializable {
     public String getDate() {
         return date;
     }
+
+    @Override
+    public String toString() {
+        return user.getName() + " | " +
+                date +  " | " +
+                spaService.getDescription() + " | " +
+                spaService.getPrice() + " kr";
+    }
 }
