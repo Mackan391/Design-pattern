@@ -119,10 +119,6 @@ public class BookingController {
             manager.upDateBooking(index, newDate);
             view.showMessage("Booking updated successfully");
         }
-
-        if (adminChoice == 3) {
-            view.showMenu();
-        }
     }
 
 

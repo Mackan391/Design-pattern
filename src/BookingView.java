@@ -23,7 +23,7 @@ public class BookingView {
     }
     public String askForAdminPassword() {
         scanner.nextLine();
-        System.out.print("Admin view, enter password: ");
+        System.out.print("Admin lösenord: ");
         return scanner.nextLine();
     }
 
@@ -33,7 +33,6 @@ public class BookingView {
         System.out.println("---Bokningsöversikt---");
         System.out.println("1. Ta bort bokning");
         System.out.println("2. Ändra bokning");
-        System.out.println("3. Gå tillbaka");
         System.out.println("Val: ");
         return scanner.nextInt();
     }
