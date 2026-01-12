@@ -23,19 +23,36 @@ public class BookingController {
                 case 1 -> handleCustomerFlow();
                 case 2 -> handleAdminFlow();
                 case 3 -> running = false;
-                default -> view.showMessage("Invalid choice");
+                default -> view.showMessage("Ogiltligt val!");
             }
         }
     }
 
     private void handleCustomerFlow() {
         String name = view.askForName();
-        String date = view.askForDate();
         User customer = new User(name, Role.CUSTOMER);
 
+        // Visa lediga datum först
+        List<String> availableDates = manager.getAvailableDates();
+        if (availableDates.isEmpty()) {
+            view.showMessage("Tyvärr, inga dagar lediga de närmaste 30 dagarna.");
+            return; // avbryt om inga datum finns
+        }
+
+        view.showAvailableDates(); // skriver ut lediga datum
+        String date = view.askForDate();
+
+        // Låt användaren välja ett datum
+        if (!availableDates.contains(date)) {
+            view.showMessage("Ogiltigt. Datumet finns ej i listan");
+            return;
+        }
+
+        // Låt användaren välja spa-tjänst
         int serviceChoice = view.askForServiceChoice();
         SpaService service = createService(serviceChoice);
 
+        // Skapa bokningen
         Booking booking = new Booking(customer, service, date);
         manager.addBooking(booking);
 
@@ -60,25 +77,19 @@ public class BookingController {
     private void handleAdminFlow() {
         String password = view.askForAdminPassword();
         if (!password.equals("admin321")) {
-            view.showMessage("Access denied.");
+            view.showMessage("Behörighet nekad.");
             return;
         }
         User admin = new User("Admin", Role.ADMIN);
         List<Booking> bookings = manager.getAllBookings(admin);
 
         if(bookings.isEmpty()) {
-            view.showMessage("No bookings found");
+            view.showMessage("Hittade inga bokningar");
             return;
         }
         System.out.println(bookings);
     }
 
-
-    public void showUserBookings(User user) {
-        for (Booking b: manager.getBookingsForUser(user)) {
-            view.showBooking(b);
-        }
-    }
 
     public void showAllBookings(User admin) {
         try {

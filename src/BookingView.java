@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class BookingView {
@@ -38,6 +39,18 @@ public class BookingView {
         scanner.nextLine();
         System.out.println("Ange ditt för- och efternamn: ");
         return scanner.nextLine();
+    }
+
+    public void showAvailableDates() {
+        List<String> dates = BookingManager.getInstance().getAvailableDates();
+        if (dates.isEmpty()) {
+            System.out.println("Tyvärr, inga dagar lediga de närmaste 30 dagarna.");
+        } else {
+            System.out.println("Tillgängliga dagar:");
+            for (String d : dates) {
+                System.out.println(d);
+            }
+        }
     }
 
     public String askForDate(){

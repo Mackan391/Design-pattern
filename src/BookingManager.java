@@ -1,5 +1,7 @@
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,33 @@ public class BookingManager {
             throw new SecurityException("Access denied");
         }
         return bookings;
+    }
+    public List<String> getAvailableDates() {
+        // Definiera alla möjliga datum (t.ex. för en månad framåt)
+        List<String> allDates = new ArrayList<>();
+        LocalDate start = LocalDate.now(); // idag
+        LocalDate end = start.plusDays(30); // en månad framåt
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
+        for (LocalDate date = start; !date.isAfter(end); date = date.plusDays(1)) {
+            allDates.add(date.format(formatter));
+        }
+
+        // Samla alla datum som redan är bokade
+        List<String> bookedDates = new ArrayList<>();
+        for (Booking b : bookings) {
+            bookedDates.add(b.getDate());
+        }
+
+        // Ta bort de bokade datumen från listan över alla datum
+        List<String> availableDates = new ArrayList<>();
+        for (String d : allDates) {
+            if (!bookedDates.contains(d)) {
+                availableDates.add(d);
+            }
+        }
+        return availableDates;
     }
 
     //Sparar bokningen till fil
