@@ -31,12 +31,13 @@ public class BookingView {
         User admin = new User("admin", Role.ADMIN);
         System.out.println("------Admin-------");
         System.out.println("---Bokningsöversikt---");
-        System.out.println("1. Delete Booking");
-        System.out.println("2. Edit Booking");
-        System.out.println("3. Back");
-        System.out.println("Choice: ");
+        System.out.println("1. Ta bort bokning");
+        System.out.println("2. Ändra bokning");
+        System.out.println("3. Gå tillbaka");
+        System.out.println("Val: ");
         return scanner.nextInt();
     }
+
     public int askForBookingIndex() {
         return scanner.nextInt();
     }
@@ -65,7 +66,6 @@ public class BookingView {
     }
 
     public String askForDate(){
-        scanner.nextLine();
         System.out.println("Ange datumet du vill boka: ");
         return scanner.nextLine();
     }
