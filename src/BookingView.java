@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class BookingView {
     private Scanner scanner =new Scanner(System.in);
+    private BookingController bookingController;
 
     public int showMenu() {
         System.out.println("--------------------------------------");
@@ -13,12 +14,25 @@ public class BookingView {
         System.out.println("Öppetider: Mån-fre 10:00-18:00");
         System.out.println();
         System.out.println("Var vänlig och välj ett av alternativen nedan:");
-        System.out.println("1. Customer");
+        System.out.println("1. Kund");
         System.out.println("2. Admin");
-        System.out.println("3. Exit");
-        System.out.println("Choice: ");
+        System.out.println("3. Avsluta");
+        System.out.println("Val, ange siffra: ");
         return scanner.nextInt();
     }
+    public String askForAdminPassword() {
+        scanner.nextLine();
+        System.out.print("Admin view, enter password: ");
+        return scanner.nextLine();
+    }
+
+    public void showAdminMenu() {
+        User admin = new User("admin", Role.ADMIN);
+        System.out.println("------Admin-------");
+        System.out.println("---Bokningsöversikt---");
+        bookingController.showAllBookings(admin);
+    }
+
 
     public String askForName(){
         scanner.nextLine();

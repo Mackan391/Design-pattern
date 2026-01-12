@@ -1,3 +1,6 @@
+import SpaServices.BasicSpa;
+import SpaServices.FacialTreatment;
+import SpaServices.Massage;
 import SpaServices.SpaService;
 
 import java.util.List;
@@ -38,6 +41,28 @@ public class BookingController {
 
         view.showMessage("Tack för din bokning!");
         view.showBooking(booking);
+    }
+
+    private SpaService createService(int choice) {
+        SpaService service = new BasicSpa();
+
+        if (choice == 2) {
+            service = new Massage(service);
+        } else if (choice == 3) {
+            service = new FacialTreatment(service);
+        } else if (choice == 4) {
+            service = new Massage(service);
+            service = new FacialTreatment(service);
+        }
+        return service;
+    }
+
+    private void handleAdminFlow() {
+        String password = view.askForAdminPassword();
+        if (!password.equals("admin321")) {
+            view.showMessage("Access denied.");
+            return;
+        }
     }
 
 
