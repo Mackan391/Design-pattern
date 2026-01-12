@@ -30,15 +30,6 @@ public class BookingManager {
         bookings.remove(index);
     }
 
-    public List<Booking> getBookingsForUser(User user) {
-        List<Booking> result = new ArrayList<>();
-        for (Booking b : bookings) {
-            if (b.getUser().getName().equals(user.getName())) {
-                result.add(b);
-            }
-        }
-        return result;
-    }
 
     public List<Booking> getAllBookings(User user) {
         if (user.getRole() != Role.ADMIN) {
@@ -47,7 +38,6 @@ public class BookingManager {
         return bookings;
     }
     public List<String> getAvailableDates() {
-        // Definiera de fasta datum som går att boka
         List<String> allDates = new ArrayList<>();
         allDates.add("2026/01/15");
         allDates.add("2026/01/20");
@@ -56,14 +46,13 @@ public class BookingManager {
         allDates.add("2026/01/28");
         allDates.add("2026/02/01");
 
-        // Samla alla datum som redan är bokade
-        List<String> bookedDates = new ArrayList<>();
+
+        List<String> bookedDates = new ArrayList<>();// Samla alla datum som redan är bokade
         for (Booking b : bookings) {
             bookedDates.add(b.getDate());
         }
 
-        // Ta bort bokade datum
-        List<String> availableDates = new ArrayList<>();
+        List<String> availableDates = new ArrayList<>(); // Ta bort bokade datum
         for (String d : allDates) {
             if (!bookedDates.contains(d)) {
                 availableDates.add(d);
@@ -102,38 +91,4 @@ public class BookingManager {
         }
     }
 
-    public boolean adminUpdateBooking(
-            User admin,
-            String customerName,
-            String oldDate,
-            String newDate
-    ) {
-        if (admin.getRole() != Role.ADMIN) {
-            throw new SecurityException("Access denied");
-        }
-        for (int i = 0; i < bookings.size(); i++) {
-            Booking current = bookings.get(i);
-
-            if (current.getUser().getName().equalsIgnoreCase(customerName)
-                    && current.getDate().equalsIgnoreCase(oldDate)) {
-
-                String finalDate;
-                if (newDate != null && !newDate.isBlank()) {
-                    finalDate = newDate;
-                } else {
-                    finalDate = current.getDate(); //ingen ändring
-                }
-
-                Booking updated = new Booking(
-                        current.getUser(),
-                        current.getSpaService(),
-                        finalDate
-                );
-
-                bookings.set(i, updated);
-                return true;
-            }
-        }
-        return false;
-    }
 }

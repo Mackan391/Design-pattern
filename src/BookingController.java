@@ -32,7 +32,7 @@ public class BookingController {
         String name = view.askForName();
         User customer = new User(name, Role.CUSTOMER);
 
-        // Visa lediga datum först
+
         List<String> availableDates = manager.getAvailableDates();
         if (availableDates.isEmpty()) {
             view.showMessage("Tyvärr, inga dagar lediga de närmaste 30 dagarna.");
@@ -42,18 +42,16 @@ public class BookingController {
         view.showAvailableDates(); // skriver ut lediga datum
         String date = view.askForDate();
 
-        // Låt användaren välja ett datum
-        if (!availableDates.contains(date)) {
+
+        if (!availableDates.contains(date)) { // Låt användaren välja ett datum
             view.showMessage("Ogiltigt. Datumet finns ej i listan");
             return;
         }
 
-        // Låt användaren välja spa-tjänst
-        int serviceChoice = view.askForServiceChoice();
+        int serviceChoice = view.askForServiceChoice(); // Låt användaren välja spa-tjänst
         SpaService service = createService(serviceChoice);
 
-        // Skapa bokningen
-        Booking booking = new Booking(customer, service, date);
+        Booking booking = new Booking(customer, service, date); // Skapa bokningen
         manager.addBooking(booking);
 
         view.showMessage("Tack för din bokning!");
@@ -119,17 +117,6 @@ public class BookingController {
             manager.upDateBooking(index, newTime);
             manager.saveBookingsToFile();
             view.showMessage("Bokningen är nu uppdaterad!");
-        }
-    }
-
-
-    public void showAllBookings(User admin) {
-        try {
-            for (Booking b: manager.getAllBookings(admin)) {
-                view.showBooking(b);
-            }
-        } catch (SecurityException e) {
-            view.showMessage("Nekad behörighet. Endast admin!");
         }
     }
 
