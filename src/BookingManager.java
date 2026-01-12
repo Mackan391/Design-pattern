@@ -61,6 +61,15 @@ public class BookingManager {
 
         return availableDates;
     }
+
+    public boolean authenticateAdmin(String password) {
+        return "admin321".equals(password);
+    }
+
+    public boolean isDateAvailable(String date) {
+        return getAvailableDates().contains(date);
+    }
+
     public void upDateBooking(int index, String newDate) {
         Booking old = bookings.get(index);
         Booking updated = new Booking(

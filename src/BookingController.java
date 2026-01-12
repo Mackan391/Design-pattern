@@ -1,7 +1,4 @@
-import SpaServices.BasicSpa;
-import SpaServices.FacialTreatment;
-import SpaServices.Massage;
-import SpaServices.SpaService;
+import SpaServices.*;
 
 import java.util.List;
 
@@ -43,13 +40,13 @@ public class BookingController {
         String date = view.askForDate();
 
 
-        if (!availableDates.contains(date)) { // Låt användaren välja ett datum
+        if (!manager.isDateAvailable(date)) {
             view.showMessage("Ogiltigt. Datumet finns ej i listan");
             return;
         }
 
         int serviceChoice = view.askForServiceChoice(); // Låt användaren välja spa-tjänst
-        SpaService service = createService(serviceChoice);
+        SpaService service = SpaServiceFactory.create(serviceChoice);
 
         Booking booking = new Booking(customer, service, date); // Skapa bokningen
         manager.addBooking(booking);
@@ -58,23 +55,10 @@ public class BookingController {
         view.showBooking(booking);
     }
 
-    private SpaService createService(int choice) {
-        SpaService service = new BasicSpa();
-
-        if (choice == 2) {
-            service = new Massage(service);
-        } else if (choice == 3) {
-            service = new FacialTreatment(service);
-        } else if (choice == 4) {
-            service = new Massage(service);
-            service = new FacialTreatment(service);
-        }
-        return service;
-    }
 
     private void handleAdminFlow() {
         String password = view.askForAdminPassword();
-        if (!password.equals("admin321")) {
+        if (!manager.authenticateAdmin(password)) {
             view.showMessage("Behörighet nekad.");
             return;
         }
@@ -117,5 +101,4 @@ public class BookingController {
             view.showMessage("Bokningen är nu uppdaterad!");
         }
     }
-
 }
