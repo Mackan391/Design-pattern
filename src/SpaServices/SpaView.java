@@ -2,7 +2,7 @@ package SpaServices;
 
 public class SpaView {
     public static void showWelcome(){
-        //Välkomstmeddelande
+
         System.out.println("--------------------------------------");
         System.out.println("  Välkommen till Relaxa Spa           ");
         System.out.println("--------------------------------------");
