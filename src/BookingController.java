@@ -63,8 +63,15 @@ public class BookingController {
             view.showMessage("Access denied.");
             return;
         }
-    }
+        User admin = new User("Admin", Role.ADMIN);
+        List<Booking> bookings = manager.getAllBookings(admin);
 
+        if(bookings.isEmpty()) {
+            view.showMessage("No bookings found");
+            return;
+        }
+        System.out.println(bookings);
+    }
 
 
     public void showUserBookings(User user) {
