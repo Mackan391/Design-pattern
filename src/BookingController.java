@@ -80,6 +80,7 @@ public class BookingController {
             view.showMessage("Behörighet nekad.");
             return;
         }
+
         User admin = new User("Admin", Role.ADMIN);
         List<Booking> bookings = manager.getAllBookings(admin);
 
@@ -108,16 +109,16 @@ public class BookingController {
         if (adminChoice == 2) {
             List<String> freeTimes = manager.getAvailableDates();
             view.showAvailableDates();
-            String newDate = view.askForDate();
 
             String newTime = view.askForNewDate();
-            if (freeTimes.contains(newTime)) {
+            if (!freeTimes.contains(newTime)) {
                 view.showMessage("Datumet ej tillgängligt!");
                 return;
             }
 
-            manager.upDateBooking(index, newDate);
-            view.showMessage("Booking updated successfully");
+            manager.upDateBooking(index, newTime);
+            manager.saveBookingsToFile();
+            view.showMessage("Bokningen är nu uppdaterad!");
         }
     }
 

@@ -41,6 +41,7 @@ public class BookingView {
         return scanner.nextInt();
     }
     public String askForNewDate() {
+        scanner.nextLine();
         System.out.println("Ange nytt datum: YYYY/MM/DD: ");
         return scanner.nextLine();
     }

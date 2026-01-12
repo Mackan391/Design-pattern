@@ -42,7 +42,7 @@ public class BookingManager {
 
     public List<Booking> getAllBookings(User user) {
         if (user.getRole() != Role.ADMIN) {
-            throw new SecurityException("Access denied");
+            throw new SecurityException("Behörighet nekad");
         }
         return bookings;
     }
