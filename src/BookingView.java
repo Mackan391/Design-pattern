@@ -28,7 +28,6 @@ public class BookingView {
     }
 
     public int showAdminMenu() {
-        User admin = new User("admin", Role.ADMIN);
         System.out.println("------Admin-------");
         System.out.println("---Bokningsöversikt---");
         System.out.println("1. Ta bort bokning");
