@@ -1,7 +1,4 @@
-import SpaServices.BasicSpa;
-import SpaServices.FacialTreatment;
-import SpaServices.Massage;
-import SpaServices.SpaService;
+import SpaServices.*;
 
 import java.util.List;
 
@@ -49,7 +46,7 @@ public class BookingController {
         }
 
         int serviceChoice = view.askForServiceChoice(); // Låt användaren välja spa-tjänst
-        SpaService service = createService(serviceChoice);
+        SpaService service = SpaServiceFactory.create(serviceChoice);
 
         Booking booking = new Booking(customer, service, date); // Skapa bokningen
         manager.addBooking(booking);
@@ -58,19 +55,6 @@ public class BookingController {
         view.showBooking(booking);
     }
 
-    private SpaService createService(int choice) {
-        SpaService service = new BasicSpa();
-
-        if (choice == 2) {
-            service = new Massage(service);
-        } else if (choice == 3) {
-            service = new FacialTreatment(service);
-        } else if (choice == 4) {
-            service = new Massage(service);
-            service = new FacialTreatment(service);
-        }
-        return service;
-    }
 
     private void handleAdminFlow() {
         String password = view.askForAdminPassword();
