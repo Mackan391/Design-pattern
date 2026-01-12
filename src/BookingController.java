@@ -101,5 +101,4 @@ public class BookingController {
             view.showMessage("Bokningen är nu uppdaterad!");
         }
     }
-
 }
