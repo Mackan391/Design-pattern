@@ -43,7 +43,7 @@ public class BookingController {
         String date = view.askForDate();
 
 
-        if (!availableDates.contains(date)) { // Låt användaren välja ett datum
+        if (!manager.isDateAvailable(date)) {
             view.showMessage("Ogiltigt. Datumet finns ej i listan");
             return;
         }
@@ -74,7 +74,7 @@ public class BookingController {
 
     private void handleAdminFlow() {
         String password = view.askForAdminPassword();
-        if (!password.equals("admin321")) {
+        if (!manager.authenticateAdmin(password)) {
             view.showMessage("Behörighet nekad.");
             return;
         }
