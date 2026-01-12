@@ -9,6 +9,20 @@ public class BookingController {
         this.view = view;
     }
 
+    public void startApplication() {
+        boolean running = true;
+        while (running) {
+            int choice = view.showMenu();
+
+            switch (choice) {
+                case 1 -> handleCustomerFlow();
+                case 2 -> handleAdminFlow();
+                case 3 -> running = false;
+                default -> view.showMessage("Invalid choice");
+            }
+        }
+    }
+
     public void createBooking(User user, SpaService service, String date){
         Booking booking = new Booking(user, service, date);
         manager.addBooking(booking);
