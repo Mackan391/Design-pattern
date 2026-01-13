@@ -12,6 +12,7 @@ public class BookingView {
         System.out.println("Telefon: 00-000 00 00");
         System.out.println("E-post: info@relaxaspa.se");
         System.out.println("Öppetider: Mån-fre 10:00-18:00");
+        System.out.println("Vid önskemål om av- eller ombokning, vänligen kontakta oss");
         System.out.println();
         System.out.println("Var vänlig och välj ett av alternativen nedan:");
         System.out.println("1. Kund");
